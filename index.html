@@ -8,22 +8,23 @@
   <style>
     * {
       box-sizing: border-box;
+      margin: 0;
+      padding: 0;
     }
 
-    body {
-      margin: 0;
-      height: 100vh;
+    body, html {
+      width: 100%;
+      height: 100%;
       font-family: 'Inter', sans-serif;
       overflow: hidden;
-      background: none;
     }
 
-    #bgVideo {
+    #bg-video {
       position: fixed;
       top: 0;
       left: 0;
-      width: 100%;
-      height: 100%;
+      min-width: 100%;
+      min-height: 100%;
       object-fit: cover;
       z-index: -1;
     }
@@ -36,11 +37,7 @@
       width: 600px;
       box-shadow: 0 10px 30px rgba(0,0,0,0.3);
       text-align: center;
-      transition: transform 0.3s ease;
-      margin: auto;
-      position: relative;
-      top: 50%;
-      transform: translateY(-50%);
+      transition: transform 0.2s ease;
     }
 
     .dynamic-wrapper {
@@ -70,6 +67,7 @@
     .social-icons {
       margin-top: 20px;
     }
+
     .social-icons a {
       margin: 0 10px;
       color: white;
@@ -80,8 +78,9 @@
   <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 </head>
 <body>
-  <video autoplay muted loop playsinline id="bgVideo">
-    <source src="Istanbul.mp4" type="video/mp4" />
+  <video autoplay muted loop id="bg-video">
+    <source src="Istanbul.mp4" type="video/mp4">
+    Your browser does not support HTML5 video.
   </video>
 
   <div class="card" id="card">
@@ -100,18 +99,16 @@
 
   <script>
     const card = document.getElementById("card");
-
     card.addEventListener("mousemove", (e) => {
       const rect = card.getBoundingClientRect();
       const x = e.clientX - rect.left - rect.width / 2;
       const y = e.clientY - rect.top - rect.height / 2;
-      const rotateX = (y / rect.height) * -20;
-      const rotateY = (x / rect.width) * 20;
-      card.style.transform = `translateY(-50%) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+      const rotateX = y / 15;
+      const rotateY = -x / 15;
+      card.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
     });
-
     card.addEventListener("mouseleave", () => {
-      card.style.transform = `translateY(-50%) rotateX(0deg) rotateY(0deg)`;
+      card.style.transform = `rotateX(0deg) rotateY(0deg)`;
     });
 
     const textElement = document.getElementById("typewriter");
