@@ -40,6 +40,7 @@
       width: 600px;
       text-align: center;
       box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+      transition: transform 0.1s ease;
     }
     .dynamic-wrapper {
       font-size: 1.8em;
@@ -76,7 +77,7 @@
   </style>
 </head>
 <body>
-  <div class="card">
+  <div class="card" id="card">
     <h1>Hello there! I'm 
       <span class="dynamic-wrapper">
         <span id="typewriter"></span><span class="cursor"></span>
@@ -92,30 +93,46 @@
   </div>
 
   <script>
-    const words = ["Emre","a Thinker.", "a Engineer.", "Creative.", "a Dreamer."];
-    let wordIndex = 0;
-    let letterIndex = 0;
-    let isDeleting = false;
-    const typewriter = document.getElementById("typewriter");
+    document.addEventListener("DOMContentLoaded", () => {
+      const card = document.getElementById("card");
 
-    function type() {
-      const word = words[wordIndex];
-      const visibleText = isDeleting ? word.substring(0, letterIndex--) : word.substring(0, letterIndex++);
+      card.addEventListener("mousemove", (e) => {
+        const rect = card.getBoundingClientRect();
+        const x = (e.clientX - rect.left - rect.width / 2) / 15;
+        const y = (e.clientY - rect.top - rect.height / 2) / 15;
+        card.style.transform = `rotateY(${x}deg) rotateX(${-y}deg)`;
+      });
 
-      typewriter.textContent = visibleText;
+      card.addEventListener("mouseleave", () => {
+        card.style.transform = `rotateY(0deg) rotateX(0deg)`;
+      });
 
-      if (!isDeleting && letterIndex === word.length + 1) {
-        isDeleting = true;
-        setTimeout(type, 1000);
-      } else if (isDeleting && letterIndex === 0) {
-        isDeleting = false;
-        wordIndex = (wordIndex + 1) % words.length;
-        setTimeout(type, 200);
-      } else {
-        setTimeout(type, isDeleting ? 50 : 100);
+      const words = ["a Thinker.", "a Coder.", "Creative.", "a Dreamer."];
+      let wordIndex = 0;
+      let letterIndex = 0;
+      let isDeleting = false;
+      const typewriter = document.getElementById("typewriter");
+
+      function type() {
+        const word = words[wordIndex];
+        const visibleText = isDeleting ? word.substring(0, letterIndex--) : word.substring(0, letterIndex++);
+
+        typewriter.textContent = visibleText;
+
+        if (!isDeleting && letterIndex === word.length + 1) {
+          isDeleting = true;
+          setTimeout(type, 1000);
+        } else if (isDeleting && letterIndex === 0) {
+          isDeleting = false;
+          wordIndex = (wordIndex + 1) % words.length;
+          setTimeout(type, 200);
+        } else {
+          setTimeout(type, isDeleting ? 50 : 100);
+        }
       }
-    }
-    type();
+
+      type();
+    });
   </script>
 </body>
 </html>
