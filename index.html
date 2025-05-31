@@ -102,12 +102,28 @@
   <script>
     document.addEventListener("DOMContentLoaded", () => {
   const card = document.getElementById("card");
-  document.addEventListener("mousemove", (e) => {
-    const x = (window.innerWidth / 2 - e.clientX) / 25;
-    const y = (window.innerHeight / 2 - e.clientY) / 25;
-    card.style.transform = `rotateY(${x}deg) rotateX(${y}deg)`;
+
+  function handleMouseMove(e) {
+    const bounds = card.getBoundingClientRect();
+    const x = ((e.clientX - bounds.left) - bounds.width / 2) / 10;
+    const y = ((e.clientY - bounds.top) - bounds.height / 2) / 10;
+    card.style.transform = `rotateY(${x}deg) rotateX(${-y}deg)`;
+  }
+
+  function resetTransform() {
+    card.style.transform = "rotateY(0deg) rotateX(0deg)";
+  }
+
+  card.addEventListener("mouseenter", () => {
+    card.addEventListener("mousemove", handleMouseMove);
   });
 
+  card.addEventListener("mouseleave", () => {
+    card.removeEventListener("mousemove", handleMouseMove);
+    resetTransform();
+  });
+
+  // Yazı efektleri
   const textElement = document.getElementById("typewriter");
   const words = ["a Thinker.", "a Coder.", "Creative.", "a Dreamer."];
   let wordIndex = 0;
