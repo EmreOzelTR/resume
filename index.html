@@ -103,27 +103,25 @@
     document.addEventListener("DOMContentLoaded", () => {
   const card = document.getElementById("card");
 
-  function handleMouseMove(e) {
-    const bounds = card.getBoundingClientRect();
-    const x = ((e.clientX - bounds.left) - bounds.width / 2) / 10;
-    const y = ((e.clientY - bounds.top) - bounds.height / 2) / 10;
-    card.style.transform = `rotateY(${x}deg) rotateX(${-y}deg)`;
-  }
+  card.addEventListener("mousemove", (e) => {
+    const rect = card.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
 
-  function resetTransform() {
-    card.style.transform = "rotateY(0deg) rotateX(0deg)";
-  }
+    const centerX = rect.width / 2;
+    const centerY = rect.height / 2;
 
-  card.addEventListener("mouseenter", () => {
-    card.addEventListener("mousemove", handleMouseMove);
+    const rotateX = ((y - centerY) / centerY) * -20;  // Daha fazla dikey dönüş
+    const rotateY = ((x - centerX) / centerX) * 20;   // Daha fazla yatay dönüş
+
+    card.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
   });
 
   card.addEventListener("mouseleave", () => {
-    card.removeEventListener("mousemove", handleMouseMove);
-    resetTransform();
+    card.style.transform = "rotateX(0deg) rotateY(0deg)";
   });
 
-  // Yazı efektleri
+  // Typewriter animasyonu
   const textElement = document.getElementById("typewriter");
   const words = ["a Thinker.", "a Coder.", "Creative.", "a Dreamer."];
   let wordIndex = 0;
