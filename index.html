@@ -28,6 +28,7 @@
       transition: transform 0.4s cubic-bezier(0.25, 0.1, 0.25, 1);
       text-align: center;
       perspective: 1000px;
+      z-index: 10;
     }
 
     .dynamic-wrapper {
@@ -56,13 +57,17 @@
 
     .social-icons {
       margin-top: 20px;
+      display: flex;
+      justify-content: center;
+      z-index: 1000;
     }
 
     .social-icons a {
       margin: 0 10px;
-      color: white;
+      color: #ffffff;
       font-size: 24px;
       text-decoration: none;
+      transition: color 0.3s ease;
     }
 
     .social-icons a:hover {
@@ -80,8 +85,8 @@
     <p>My name is Emre. I’m an engineer with a passion for technology and design. I enjoy creating ideas, building them, and sharing my work.</p>
     <p>I work in software, explore music, and seek exciting collaborations. Always ready to learn and grow!</p>
     <div class="social-icons">
-      <a href="https://www.linkedin.com/in/emre-ozel-tr/" target="_blank"><i class="fab fa-linkedin"></i></a>
-      <a href="mailto:i.emreozell@gmail.com"><i class="fas fa-envelope"></i></a>
+      <a href="https://www.linkedin.com/in/emre-ozel-tr/" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+      <a href="mailto:i.emreozell@gmail.com" aria-label="Email"><i class="fas fa-envelope"></i></a>
     </div>
   </div>
 
