@@ -17,16 +17,15 @@
       height: 100%;
       font-family: 'Inter', sans-serif;
       overflow: hidden;
+      background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+      background-size: 400% 400%;
+      animation: gradientBG 15s ease infinite;
     }
 
-    #bg-video {
-      position: fixed;
-      top: 0;
-      left: 0;
-      min-width: 100%;
-      min-height: 100%;
-      object-fit: cover;
-      z-index: -1;
+    @keyframes gradientBG {
+      0% {background-position: 0% 50%;}
+      50% {background-position: 100% 50%;}
+      100% {background-position: 0% 50%;}
     }
 
     .card {
@@ -38,6 +37,11 @@
       box-shadow: 0 10px 30px rgba(0,0,0,0.3);
       text-align: center;
       transition: transform 0.2s ease;
+      position: relative;
+      z-index: 1;
+      margin: auto;
+      top: 50%;
+      transform: translateY(-50%);
     }
 
     .dynamic-wrapper {
@@ -78,11 +82,6 @@
   <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 </head>
 <body>
-  <video autoplay muted loop id="bg-video">
-    <source src="Istanbul.mp4" type="video/mp4">
-    Your browser does not support HTML5 video.
-  </video>
-
   <div class="card" id="card">
     <h1>Hello there! I'm 
       <span class="dynamic-wrapper">
@@ -105,14 +104,14 @@
       const y = e.clientY - rect.top - rect.height / 2;
       const rotateX = y / 15;
       const rotateY = -x / 15;
-      card.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+      card.style.transform = `translateY(-50%) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
     });
     card.addEventListener("mouseleave", () => {
-      card.style.transform = `rotateX(0deg) rotateY(0deg)`;
+      card.style.transform = `translateY(-50%) rotateX(0deg) rotateY(0deg)`;
     });
 
     const textElement = document.getElementById("typewriter");
-    const words = ["Emre","a Thinker.", "an Engineer.", "Creative.", "a Dreamer."];
+    const words = ["Emre", "a Thinker.", "an Engineer.", "Creative.", "a Dreamer."];
     let wordIndex = 0;
 
     function typeEffect() {
