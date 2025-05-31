@@ -101,32 +101,48 @@
 
   <script>
     document.addEventListener("DOMContentLoaded", () => {
-      const words = ["Emre","a Thinker.", "an Engineer.", "Creative.", "a Dreamer."];
-      let wordIndex = 0;
-      let letterIndex = 0;
-      let isDeleting = false;
-      const typewriter = document.getElementById("typewriter");
+  const card = document.getElementById("card");
+  document.addEventListener("mousemove", (e) => {
+    const x = (window.innerWidth / 2 - e.clientX) / 25;
+    const y = (window.innerHeight / 2 - e.clientY) / 25;
+    card.style.transform = `rotateY(${x}deg) rotateX(${y}deg)`;
+  });
 
-      function type() {
-        const word = words[wordIndex];
-        const visibleText = isDeleting ? word.substring(0, letterIndex--) : word.substring(0, letterIndex++);
+  const textElement = document.getElementById("typewriter");
+  const words = ["a Thinker.", "a Coder.", "Creative.", "a Dreamer."];
+  let wordIndex = 0;
 
-        typewriter.textContent = visibleText;
+  function typeEffect() {
+    const currentWord = words[wordIndex];
+    let i = 0;
+    textElement.textContent = "";
 
-        if (!isDeleting && letterIndex === word.length + 1) {
-          isDeleting = true;
-          setTimeout(type, 1000);
-        } else if (isDeleting && letterIndex === 0) {
-          isDeleting = false;
-          wordIndex = (wordIndex + 1) % words.length;
-          setTimeout(type, 200);
-        } else {
-          setTimeout(type, isDeleting ? 50 : 100);
-        }
+    const typeInterval = setInterval(() => {
+      textElement.textContent += currentWord.charAt(i);
+      i++;
+      if (i >= currentWord.length) {
+        clearInterval(typeInterval);
+        setTimeout(() => eraseEffect(currentWord), 1200);
       }
+    }, 100);
+  }
 
-      type();
-    });
+  function eraseEffect(word) {
+    let i = word.length;
+
+    const eraseInterval = setInterval(() => {
+      textElement.textContent = word.substring(0, i);
+      i--;
+      if (i < 0) {
+        clearInterval(eraseInterval);
+        wordIndex = (wordIndex + 1) % words.length;
+        setTimeout(typeEffect, 500);
+      }
+    }, 50);
+  }
+
+  typeEffect();
+});
   </script>
 </body>
 </html>
