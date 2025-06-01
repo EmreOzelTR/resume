@@ -37,6 +37,7 @@
       border-radius: 50%;
       overflow: hidden;
       border: 3px solid white;
+      z-index: 2;
     }
 
     .profile-pic img {
@@ -52,6 +53,7 @@
       height: 100vh;
       padding: 20px;
       box-sizing: border-box;
+      perspective: 800px;
     }
 
     .card {
@@ -104,6 +106,22 @@
       color: #00ffff;
     }
 
+    .download-btn {
+      margin-top: 30px;
+      display: inline-block;
+      padding: 12px 24px;
+      background-color: #00ffff;
+      color: black;
+      border-radius: 8px;
+      font-weight: bold;
+      text-decoration: none;
+      transition: background-color 0.3s;
+    }
+
+    .download-btn:hover {
+      background-color: #00cccc;
+    }
+
     @media (max-width: 600px) {
       .card {
         padding: 25px;
@@ -126,8 +144,9 @@
   <div class="profile-pic">
     <img src="profile.jpg" alt="Profile Picture" />
   </div>
+
   <div class="wrapper">
-    <div class="card">
+    <div class="card" id="card">
       <h1>Hello there! I'm 
         <span class="dynamic-wrapper">
           <span id="typewriter"></span><span class="cursor"></span>
@@ -135,18 +154,18 @@
       </h1>
       <p>I am an Electrical and Electronics Engineer with a strong interest in software engineering and business analysis.</p>
       <p>Passionate about leveraging technology for innovative solutions, I aim to contribute to impactful projects while continuously learning and growing. With analytical thinking, problem-solving skills, and a collaborative mindset, I am eager to add value to dynamic and challenging environments.</p>
+      
       <div class="social-icons">
-        <a href="https://www.linkedin.com/in/emre-ozel-tr/" target="_blank" aria-label="LinkedIn">
-          <i class="fab fa-linkedin-in"></i>
-        </a>
-        <a href="mailto:i.emreozell@gmail.com" aria-label="Email">
-          <i class="fas fa-envelope"></i>
-        </a>
+        <a href="https://www.linkedin.com/in/emre-ozel-tr/" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+        <a href="mailto:i.emreozell@gmail.com" aria-label="Email"><i class="fas fa-envelope"></i></a>
       </div>
+
+      <a class="download-btn" href="https://drive.google.com/file/d/1gDRtMdXkroGGGPSN08pcnXEcdJCjnomB/view?usp=share_link" target="_blank">Download CV</a>
     </div>
   </div>
 
   <script>
+    // Typewriter effect
     document.addEventListener("DOMContentLoaded", () => {
       const words = ["Emre", "a Thinker.", "an Engineer.", "Creative.", "a Dreamer."];
       let wordIndex = 0;
@@ -157,7 +176,6 @@
       function type() {
         const word = words[wordIndex];
         const visibleText = isDeleting ? word.substring(0, letterIndex--) : word.substring(0, letterIndex++);
-
         typewriter.textContent = visibleText;
 
         if (!isDeleting && letterIndex === word.length + 1) {
@@ -173,6 +191,18 @@
       }
 
       type();
+    });
+
+    // Smooth 3D tilt effect
+    const card = document.getElementById("card");
+    document.addEventListener("mousemove", (e) => {
+      const x = (e.clientX / window.innerWidth - 0.5) * 10;
+      const y = (e.clientY / window.innerHeight - 0.5) * 10;
+      card.style.transform = `rotateY(${x}deg) rotateX(${y * -1}deg)`;
+    });
+
+    document.addEventListener("mouseleave", () => {
+      card.style.transform = `rotateY(0deg) rotateX(0deg)`;
     });
   </script>
 </body>
