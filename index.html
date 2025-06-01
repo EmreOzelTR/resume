@@ -5,12 +5,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Emre | Portfolio</title>
   <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;700&display=swap" rel="stylesheet">
- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha512-Fo3rlrZj/k7ujTTXRVWmB4U1PzI3cF2k3X9Fk5IGL0OM+x9f7vQZ2K5TfN8RFOw1yHg+10z6LNK3xF9aYBF0nQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <style>
     html, body {
       margin: 0;
       padding: 0;
       height: 100%;
-      background: transparent;
+      background: black;
       overflow: hidden;
       font-family: 'Figtree', sans-serif;
     }
@@ -100,7 +102,7 @@
 <body>
   <video autoplay muted loop playsinline id="bg-video">
     <source src="Istanbul.mp4" type="video/mp4">
-    
+    Your browser does not support the video tag.
   </video>
 
   <div class="wrapper">
@@ -120,7 +122,6 @@
   </div>
 
   <script>
-    // Dinamik yazı efekti
     document.addEventListener("DOMContentLoaded", () => {
       const words = ["Emre", "a Thinker.", "an Engineer.", "Creative.", "a Dreamer."];
       let wordIndex = 0;
@@ -131,7 +132,6 @@
       function type() {
         const word = words[wordIndex];
         const visibleText = isDeleting ? word.substring(0, letterIndex--) : word.substring(0, letterIndex++);
-
         typewriter.textContent = visibleText;
 
         if (!isDeleting && letterIndex === word.length + 1) {
@@ -149,7 +149,6 @@
       type();
     });
 
-    // 3D mouse efekti
     const card = document.getElementById("card");
     card.addEventListener("mousemove", (e) => {
       const rect = card.getBoundingClientRect();
