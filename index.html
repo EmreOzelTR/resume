@@ -6,34 +6,35 @@
   <title>Emre | Portfolio</title>
   <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha512-Fo3rlrZj/k7ujTTXRVWmB4U1PzI3cF2k3X9Fk5IGL0OM+x9f7vQZ2K5TfN8RFOw1yHg+10z6LNK3xF9aYBF0nQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-
   <style>
     html, body {
       margin: 0;
       padding: 0;
       height: 100%;
-      background: black;
-      overflow: hidden;
       font-family: 'Figtree', sans-serif;
+      overflow: hidden;
+      background-color: black;
     }
 
     video#bg-video {
       position: fixed;
-      top: 0; left: 0;
-      width: 100vw;
-      height: 100vh;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
       object-fit: cover;
       z-index: -1;
+      pointer-events: none;
     }
 
     .wrapper {
       display: flex;
       justify-content: center;
       align-items: center;
-      height: 100vh;
-      perspective: 1000px;
+      height: 100dvh;
       padding: 20px;
       box-sizing: border-box;
+      perspective: 1000px;
     }
 
     .card {
@@ -44,7 +45,7 @@
       width: 100%;
       max-width: 600px;
       text-align: center;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
       transition: transform 0.3s ease;
     }
 
