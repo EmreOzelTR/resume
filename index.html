@@ -23,7 +23,6 @@
       width: 100%;
       height: 100%;
       background: url('resumebackground.jpg') no-repeat center center/cover;
-      opacity: 0.3;
       z-index: -1;
     }
 
@@ -65,7 +64,8 @@
       width: 100%;
       text-align: center;
       box-shadow: 0 10px 30px rgba(0,0,0,0.6);
-      transition: transform 0.3s ease;
+      transition: transform 0.1s ease-out;
+      will-change: transform;
     }
 
     .dynamic-wrapper {
@@ -156,8 +156,8 @@
       <p>Passionate about leveraging technology for innovative solutions, I aim to contribute to impactful projects while continuously learning and growing. With analytical thinking, problem-solving skills, and a collaborative mindset, I am eager to add value to dynamic and challenging environments.</p>
       
       <div class="social-icons">
-        <a href="https://www.linkedin.com/in/emre-ozel-tr/" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
-        <a href="mailto:i.emreozell@gmail.com" aria-label="Email"><i class="fas fa-envelope"></i></a>
+        <a href="https://www.linkedin.com/in/emre-ozel-tr/" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+        <a href="mailto:i.emreozell@gmail.com"><i class="fas fa-envelope"></i></a>
       </div>
 
       <a class="download-btn" href="https://drive.google.com/file/d/1gDRtMdXkroGGGPSN08pcnXEcdJCjnomB/view?usp=share_link" target="_blank">Download CV</a>
@@ -193,17 +193,21 @@
       type();
     });
 
-    // Smooth 3D tilt effect
+    // Smooth 3D tilt effect with requestAnimationFrame
     const card = document.getElementById("card");
+    let mouseX = 0, mouseY = 0;
+
     document.addEventListener("mousemove", (e) => {
-      const x = (e.clientX / window.innerWidth - 0.5) * 10;
-      const y = (e.clientY / window.innerHeight - 0.5) * 10;
-      card.style.transform = `rotateY(${x}deg) rotateX(${y * -1}deg)`;
+      mouseX = (e.clientX / window.innerWidth - 0.5) * 10;
+      mouseY = (e.clientY / window.innerHeight - 0.5) * 10;
     });
 
-    document.addEventListener("mouseleave", () => {
-      card.style.transform = `rotateY(0deg) rotateX(0deg)`;
-    });
+    function animateTilt() {
+      card.style.transform = `rotateY(${mouseX}deg) rotateX(${-mouseY}deg)`;
+      requestAnimationFrame(animateTilt);
+    }
+
+    animateTilt();
   </script>
 </body>
 </html>
