@@ -11,26 +11,34 @@
       margin: 0;
       padding: 0;
       height: 100%;
-      background-color: black;
       font-family: 'Figtree', sans-serif;
-      display: flex;
-      justify-content: center;
-      align-items: center;
+      background: black;
       overflow: hidden;
     }
 
-    .wrapper {
-      perspective: 1000px;
-      padding: 20px;
-      box-sizing: border-box;
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0;
+      left: 0;
       width: 100%;
+      height: 100%;
+      background: url('https://static1.squarespace.com/static/5e949a92e17d55230cd1d44f/t/67834196e3cc347185c02241/1736655274086/F05_Mac.png') no-repeat center center/cover;
+      opacity: 0.3;
+      z-index: -1;
+    }
+
+    .wrapper {
       display: flex;
       justify-content: center;
       align-items: center;
+      height: 100vh;
+      padding: 20px;
+      box-sizing: border-box;
     }
 
     .card {
-      background: rgba(0, 0, 0, 0.85);
+      background: rgba(0, 0, 0, 0.8);
       color: white;
       padding: 40px;
       border-radius: 16px;
@@ -38,7 +46,6 @@
       width: 100%;
       text-align: center;
       box-shadow: 0 10px 30px rgba(0,0,0,0.6);
-      transition: transform 0.1s ease-out;
     }
 
     .dynamic-wrapper {
@@ -83,9 +90,11 @@
       .card {
         padding: 25px;
       }
+
       .dynamic-wrapper {
         font-size: 1.3em;
       }
+
       .social-icons a {
         font-size: 22px;
       }
@@ -94,7 +103,7 @@
 </head>
 <body>
   <div class="wrapper">
-    <div class="card" id="card">
+    <div class="card">
       <h1>Hello there! I'm 
         <span class="dynamic-wrapper">
           <span id="typewriter"></span><span class="cursor"></span>
@@ -103,14 +112,17 @@
       <p>My name is Emre. I’m an engineer with a passion for technology and design.</p>
       <p>I work in software, explore music, and seek exciting collaborations.</p>
       <div class="social-icons">
-        <a href="https://www.linkedin.com/in/emre-ozel-tr/" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
-        <a href="mailto:i.emreozell@gmail.com" aria-label="Email"><i class="fas fa-envelope"></i></a>
+        <a href="https://www.linkedin.com/in/emre-ozel-tr/" target="_blank" aria-label="LinkedIn">
+          <i class="fab fa-linkedin-in"></i>
+        </a>
+        <a href="mailto:i.emreozell@gmail.com" aria-label="Email">
+          <i class="fas fa-envelope"></i>
+        </a>
       </div>
     </div>
   </div>
 
   <script>
-    // Dinamik yazı efekti
     document.addEventListener("DOMContentLoaded", () => {
       const words = ["Emre", "a Thinker.", "an Engineer.", "Creative.", "a Dreamer."];
       let wordIndex = 0;
@@ -120,7 +132,10 @@
 
       function type() {
         const word = words[wordIndex];
-        const visibleText = isDeleting ? word.substring(0, letterIndex--) : word.substring(0, letterIndex++);
+        const visibleText = isDeleting
+          ? word.substring(0, letterIndex--)
+          : word.substring(0, letterIndex++);
+
         typewriter.textContent = visibleText;
 
         if (!isDeleting && letterIndex === word.length + 1) {
