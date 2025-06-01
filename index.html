@@ -13,7 +13,7 @@
       height: 100%;
       font-family: 'Figtree', sans-serif;
       background: black;
-      overflow: hidden;
+      overflow-x: hidden;
     }
 
     body::before {
@@ -30,11 +30,21 @@
 
     .wrapper {
       display: flex;
-      justify-content: center;
+      flex-direction: column;
       align-items: center;
-      height: 100vh;
       padding: 20px;
+      min-height: 100vh;
       box-sizing: border-box;
+      justify-content: center;
+    }
+
+    .profile-pic {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid white;
+      margin-bottom: 20px;
     }
 
     .card {
@@ -86,40 +96,54 @@
       color: #00ffff;
     }
 
+    .cv-button {
+      margin-top: 35px;
+    }
+
+    .cv-button a {
+      display: inline-block;
+      padding: 12px 24px;
+      background-color: #00ffff;
+      color: black;
+      text-decoration: none;
+      font-weight: bold;
+      border-radius: 8px;
+      transition: background 0.3s;
+    }
+
+    .cv-button a:hover {
+      background-color: #00dddd;
+    }
+
     @media (max-width: 600px) {
-      .card {
-        padding: 25px;
-      }
-
-      .dynamic-wrapper {
-        font-size: 1.3em;
-      }
-
-      .social-icons a {
-        font-size: 22px;
-      }
+      .card { padding: 25px; }
+      .dynamic-wrapper { font-size: 1.3em; }
+      .social-icons a { font-size: 22px; }
     }
   </style>
 </head>
 <body>
   <div class="wrapper">
+    <img src="profile.jpg" alt="Emre Profile" class="profile-pic" />
+
     <div class="card">
       <h1>Hello there! I'm 
         <span class="dynamic-wrapper">
           <span id="typewriter"></span><span class="cursor"></span>
         </span>
       </h1>
-      <p>I am an Electrical and Electronics Engineer with a strong interest in software engineering and business
-analysis. </p>
-      <p>Passionate about leveraging technology for innovative solutions, I aim to contribute to impactful
-projects while continuously learning and growing. With analytical thinking, problem-solving skills, and a
-collaborative mindset, I am eager to add value to dynamic and challenging environments.</p>
+
+      <p>I am an Electrical and Electronics Engineer with a strong interest in software engineering and business analysis.</p>
+      <p>Passionate about leveraging technology for innovative solutions, I aim to contribute to impactful projects while continuously learning and growing. With analytical thinking, problem-solving skills, and a collaborative mindset, I am eager to add value to dynamic and challenging environments.</p>
+
       <div class="social-icons">
-        <a href="https://www.linkedin.com/in/emre-ozel-tr/" target="_blank" aria-label="LinkedIn">
-          <i class="fab fa-linkedin-in"></i>
-        </a>
-        <a href="mailto:i.emreozell@gmail.com" aria-label="Email">
-          <i class="fas fa-envelope"></i>
+        <a href="https://www.linkedin.com/in/emre-ozel-tr/" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+        <a href="mailto:i.emreozell@gmail.com"><i class="fas fa-envelope"></i></a>
+      </div>
+
+      <div class="cv-button">
+        <a href="https://drive.google.com/file/d/1gDRtMdXkroGGGPSN08pcnXEcdJCjnomB/view?usp=share_link" target="_blank">
+          Download CV
         </a>
       </div>
     </div>
