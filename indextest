@@ -1,0 +1,224 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Emre | Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      font-family: 'Figtree', sans-serif;
+      overflow: hidden;
+    }
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: black;
+      z-index: -1;
+    }
+    .profile-pic {
+      position: absolute;
+      top: 40px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      overflow: hidden;
+      border: 3px solid white;
+      z-index: 2;
+    }
+    .profile-pic img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .wrapper {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      padding: 20px;
+      box-sizing: border-box;
+      perspective: 800px;
+    }
+    .card {
+      background: rgba(0, 0, 0, 0.8);
+      color: white;
+      padding: 40px;
+      border-radius: 16px;
+      max-width: 600px;
+      width: 100%;
+      text-align: center;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+      transition: transform 0.1s ease-out;
+      will-change: transform;
+    }
+    .dynamic-wrapper {
+      font-size: 1.8em;
+      color: #00ffff;
+      font-weight: bold;
+    }
+    .cursor {
+      display: inline-block;
+      width: 2px;
+      height: 1em;
+      background-color: white;
+      margin-left: 4px;
+      animation: blink 0.7s step-end infinite alternate;
+    }
+    @keyframes blink {
+      from { opacity: 1; }
+      to { opacity: 0; }
+    }
+    .social-icons {
+      margin-top: 25px;
+      display: flex;
+      justify-content: center;
+      gap: 24px;
+    }
+    .social-icons a {
+      color: white;
+      font-size: 26px;
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+    .social-icons a:hover {
+      color: #00ffff;
+    }
+    .download-btn {
+      margin-top: 30px;
+      display: inline-block;
+      padding: 12px 24px;
+      background-color: #00ffff;
+      color: black;
+      border-radius: 8px;
+      font-weight: bold;
+      text-decoration: none;
+      transition: background-color 0.3s;
+    }
+    .download-btn:hover {
+      background-color: #00cccc;
+    }
+    @media (max-width: 600px) {
+      .card {
+        padding: 25px;
+      }
+      .dynamic-wrapper {
+        font-size: 1.3em;
+      }
+      .social-icons a {
+        font-size: 22px;
+      }
+      .profile-pic {
+        width: 100px;
+        height: 100px;
+        top: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="profile-pic">
+    <img src="profile.jpg" alt="Profile Picture" />
+  </div>
+
+  <div class="wrapper">
+    <div class="card" id="card">
+      <h1>Hello there! I'm 
+        <span class="dynamic-wrapper">
+          <span id="typewriter"></span><span class="cursor"></span>
+        </span>
+      </h1>
+      <p>I am an Electrical and Electronics Engineer with a strong interest in software engineering and business analysis.</p>
+      <p>Passionate about leveraging technology for innovative solutions, I aim to contribute to impactful projects while continuously learning and growing.</p>
+      <div class="social-icons">
+        <a href="https://www.linkedin.com/in/emre-ozel-tr/" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+        <a href="mailto:i.emreozell@gmail.com"><i class="fas fa-envelope"></i></a>
+      </div>
+      <a class="download-btn" href="https://drive.google.com/" target="_blank">Download CV</a>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const words = ["Emre", "a Thinker.", "an Engineer.", "Creative.", "a Dreamer."];
+      let wordIndex = 0;
+      let letterIndex = 0;
+      let isDeleting = false;
+      const typewriter = document.getElementById("typewriter");
+
+      function type() {
+        const word = words[wordIndex];
+        const visibleText = isDeleting ? word.substring(0, letterIndex--) : word.substring(0, letterIndex++);
+        typewriter.textContent = visibleText;
+        if (!isDeleting && letterIndex === word.length + 1) {
+          isDeleting = true;
+          setTimeout(type, 1000);
+        } else if (isDeleting && letterIndex === 0) {
+          isDeleting = false;
+          wordIndex = (wordIndex + 1) % words.length;
+          setTimeout(type, 200);
+        } else {
+          setTimeout(type, isDeleting ? 50 : 100);
+        }
+      }
+
+      type();
+    });
+
+    const card = document.getElementById("card");
+
+    function desktopTilt() {
+      let mouseX = 0, mouseY = 0;
+      document.addEventListener("mousemove", (e) => {
+        mouseX = (e.clientX / window.innerWidth - 0.5) * 10;
+        mouseY = (e.clientY / window.innerHeight - 0.5) * 10;
+      });
+
+      function animateTilt() {
+        card.style.transform = `rotateY(${mouseX}deg) rotateX(${-mouseY}deg)`;
+        requestAnimationFrame(animateTilt);
+      }
+      animateTilt();
+    }
+
+    function mobileTilt() {
+      function applyTilt(beta, gamma) {
+        const rotateX = Math.max(Math.min(beta - 50, 20), -20);
+        const rotateY = Math.max(Math.min(gamma, 20), -20);
+        card.style.transform = `rotateX(${-rotateX}deg) rotateY(${rotateY}deg)`;
+      }
+
+      if (typeof DeviceOrientationEvent !== "undefined" && typeof DeviceOrientationEvent.requestPermission === "function") {
+        DeviceOrientationEvent.requestPermission().then(permissionState => {
+          if (permissionState === "granted") {
+            window.addEventListener("deviceorientation", (event) => {
+              applyTilt(event.beta, event.gamma);
+            }, true);
+          }
+        }).catch(console.error);
+      } else {
+        window.addEventListener("deviceorientation", (event) => {
+          applyTilt(event.beta, event.gamma);
+        }, true);
+      }
+    }
+
+    if (/Android|iPhone|iPad|iPod/i.test(navigator.userAgent)) {
+      mobileTilt();
+    } else {
+      desktopTilt();
+    }
+  </script>
+</body>
+</html>
