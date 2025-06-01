@@ -12,7 +12,6 @@
       padding: 0;
       height: 100%;
       font-family: 'Figtree', sans-serif;
-      background: black;
       overflow: hidden;
     }
 
@@ -30,15 +29,20 @@
 
     .profile-pic {
       position: absolute;
-      top: 30px;
+      top: 40px;
       left: 50%;
       transform: translateX(-50%);
       width: 120px;
       height: 120px;
       border-radius: 50%;
-      border: 4px solid white;
+      overflow: hidden;
+      border: 3px solid white;
+    }
+
+    .profile-pic img {
+      width: 100%;
+      height: 100%;
       object-fit: cover;
-      box-shadow: 0 0 10px rgba(0,0,0,0.5);
     }
 
     .wrapper {
@@ -59,7 +63,7 @@
       width: 100%;
       text-align: center;
       box-shadow: 0 10px 30px rgba(0,0,0,0.6);
-      transition: transform 0.2s ease-out;
+      transition: transform 0.3s ease;
     }
 
     .dynamic-wrapper {
@@ -100,54 +104,37 @@
       color: #00ffff;
     }
 
-    .cv-button {
-      margin-top: 20px;
-      padding: 10px 20px;
-      border: 2px solid #00ffff;
-      background: transparent;
-      color: #00ffff;
-      font-size: 16px;
-      cursor: pointer;
-      border-radius: 8px;
-      transition: all 0.3s ease;
-    }
-
-    .cv-button:hover {
-      background-color: #00ffff;
-      color: black;
-    }
-
     @media (max-width: 600px) {
       .card {
         padding: 25px;
       }
-
       .dynamic-wrapper {
         font-size: 1.3em;
       }
-
       .social-icons a {
         font-size: 22px;
       }
-
-      .cv-button {
-        font-size: 14px;
+      .profile-pic {
+        width: 100px;
+        height: 100px;
+        top: 20px;
       }
     }
   </style>
 </head>
 <body>
-  <img src="assets/profil.jpg" alt="Profile" class="profile-pic" />
-
+  <div class="profile-pic">
+    <img src="profile.jpg" alt="Profile Picture" />
+  </div>
   <div class="wrapper">
-    <div class="card" id="card">
+    <div class="card">
       <h1>Hello there! I'm 
         <span class="dynamic-wrapper">
           <span id="typewriter"></span><span class="cursor"></span>
         </span>
       </h1>
       <p>I am an Electrical and Electronics Engineer with a strong interest in software engineering and business analysis.</p>
-      <p>Passionate about leveraging technology for innovative solutions, I aim to contribute to impactful projects while continuously learning and growing.</p>
+      <p>Passionate about leveraging technology for innovative solutions, I aim to contribute to impactful projects while continuously learning and growing. With analytical thinking, problem-solving skills, and a collaborative mindset, I am eager to add value to dynamic and challenging environments.</p>
       <div class="social-icons">
         <a href="https://www.linkedin.com/in/emre-ozel-tr/" target="_blank" aria-label="LinkedIn">
           <i class="fab fa-linkedin-in"></i>
@@ -156,9 +143,6 @@
           <i class="fas fa-envelope"></i>
         </a>
       </div>
-      <a href="https://drive.google.com/file/d/1gDRtMdXkroGGGPSN08pcnXEcdJCjnomB/view?usp=share_link" target="_blank">
-        <button class="cv-button">Download CV</button>
-      </a>
     </div>
   </div>
 
@@ -172,9 +156,7 @@
 
       function type() {
         const word = words[wordIndex];
-        const visibleText = isDeleting
-          ? word.substring(0, letterIndex--)
-          : word.substring(0, letterIndex++);
+        const visibleText = isDeleting ? word.substring(0, letterIndex--) : word.substring(0, letterIndex++);
 
         typewriter.textContent = visibleText;
 
@@ -191,21 +173,6 @@
       }
 
       type();
-    });
-
-    // Smooth 3D effect with mouse movement
-    const card = document.getElementById("card");
-    document.addEventListener("mousemove", (e) => {
-      const rect = card.getBoundingClientRect();
-      const x = e.clientX - rect.left - rect.width / 2;
-      const y = e.clientY - rect.top - rect.height / 2;
-      const rotateX = (-y / 40).toFixed(2);
-      const rotateY = (x / 40).toFixed(2);
-      card.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
-    });
-
-    document.addEventListener("mouseleave", () => {
-      card.style.transform = `rotateX(0deg) rotateY(0deg)`;
     });
   </script>
 </body>
