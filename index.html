@@ -2,10 +2,10 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Emre | Portfolio</title>
   <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha512-Fo3rlrZj/k7ujTTXRVWmB4U1PzI3cF2k3X9Fk5IGL0OM+x9f7vQZ2K5TfN8RFOw1yHg+10z6LNK3xF9aYBF0nQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   <style>
     html, body {
       margin: 0;
@@ -16,8 +16,7 @@
       font-family: 'Figtree', sans-serif;
     }
 
-    /* Video arka plan */
-    #bg-video {
+    video#bg-video {
       position: fixed;
       top: 0; left: 0;
       width: 100vw;
@@ -26,16 +25,26 @@
       z-index: -1;
     }
 
+    .wrapper {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      perspective: 1000px;
+      padding: 20px;
+      box-sizing: border-box;
+    }
+
     .card {
       background: rgba(0, 0, 0, 0.8);
       color: white;
       padding: 40px;
       border-radius: 16px;
-      width: 600px;
+      width: 100%;
+      max-width: 600px;
       text-align: center;
       box-shadow: 0 10px 30px rgba(0,0,0,0.6);
       transition: transform 0.3s ease;
-      margin: auto;
     }
 
     .dynamic-wrapper {
@@ -59,36 +68,40 @@
     }
 
     .social-icons {
-      margin-top: 20px;
+      margin-top: 25px;
       display: flex;
       justify-content: center;
-      gap: 20px;
+      gap: 24px;
     }
 
     .social-icons a {
       color: white;
-      font-size: 24px;
+      font-size: 26px;
       text-decoration: none;
       transition: color 0.3s;
     }
 
     .social-icons a:hover {
-      color: #cccccc;
+      color: #00ffff;
     }
 
-    .wrapper {
-      height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      perspective: 1000px;
+    @media (max-width: 600px) {
+      .card {
+        padding: 25px;
+      }
+      .dynamic-wrapper {
+        font-size: 1.3em;
+      }
+      .social-icons a {
+        font-size: 22px;
+      }
     }
   </style>
 </head>
 <body>
-  <video autoplay muted loop id="bg-video">
+  <video autoplay muted loop playsinline id="bg-video">
     <source src="Istanbul.mp4" type="video/mp4">
-    
+    Your browser does not support the video tag.
   </video>
 
   <div class="wrapper">
@@ -101,14 +114,14 @@
       <p>My name is Emre. I’m an engineer with a passion for technology and design.</p>
       <p>I work in software, explore music, and seek exciting collaborations.</p>
       <div class="social-icons">
-        <a href="https://www.linkedin.com/in/emre-ozel-tr/" target="_blank"><i class="fab fa-linkedin-in"></i></a>
-        <a href="mailto:i.emreozell@gmail.com"><i class="fas fa-envelope"></i></a>
+        <a href="https://www.linkedin.com/in/emre-ozel-tr/" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+        <a href="mailto:i.emreozell@gmail.com" aria-label="Email"><i class="fas fa-envelope"></i></a>
       </div>
     </div>
   </div>
 
   <script>
-    // Tip efekti
+    // Dinamik yazı efekti
     document.addEventListener("DOMContentLoaded", () => {
       const words = ["Emre", "a Thinker.", "an Engineer.", "Creative.", "a Dreamer."];
       let wordIndex = 0;
@@ -137,16 +150,14 @@
       type();
     });
 
-    // 3D efekt
+    // 3D mouse efekti
     const card = document.getElementById("card");
-
     card.addEventListener("mousemove", (e) => {
       const rect = card.getBoundingClientRect();
       const centerX = rect.left + rect.width / 2;
       const centerY = rect.top + rect.height / 2;
       const offsetX = (e.clientX - centerX) / 20;
       const offsetY = (e.clientY - centerY) / 20;
-
       card.style.transform = `rotateY(${offsetX}deg) rotateX(${-offsetY}deg)`;
     });
 
