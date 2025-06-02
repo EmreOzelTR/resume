@@ -54,6 +54,8 @@
       padding: 20px;
       box-sizing: border-box;
       perspective: 800px;
+      flex-direction: column;
+      text-align: center;
     }
 
     .card {
@@ -63,16 +65,21 @@
       border-radius: 16px;
       max-width: 600px;
       width: 100%;
-      text-align: center;
       box-shadow: 0 10px 30px rgba(0,0,0,0.6);
       transition: transform 0.1s ease-out;
       will-change: transform;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: 2.2em;
     }
 
     .dynamic-wrapper {
       font-size: 1.8em;
       color: #00ffff;
       font-weight: bold;
+      margin-top: 8px;
     }
 
     .cursor {
@@ -127,6 +134,9 @@
       .card {
         padding: 25px;
       }
+      h1 {
+        font-size: 1.7em;
+      }
       .dynamic-wrapper {
         font-size: 1.3em;
       }
@@ -148,11 +158,11 @@
 
   <div class="wrapper">
     <div class="card" id="card">
-      <h1>Hello there! I'm 
-        <span class="dynamic-wrapper">
-          <span id="typewriter"></span><span class="cursor"></span>
-        </span>
-      </h1>
+      <h1>Hello there!</h1>
+      <h2 class="dynamic-wrapper">
+        I'm <span id="typewriter"></span><span class="cursor"></span>
+      </h2>
+
       <p>I am an Electrical and Electronics Engineer with a strong interest in software engineering and business analysis.</p>
       <p>Passionate about leveraging technology for innovative solutions, I aim to contribute to impactful projects while continuously learning and growing. With analytical thinking, problem-solving skills, and a collaborative mindset, I am eager to add value to dynamic and challenging environments.</p>
       
@@ -194,7 +204,7 @@
       type();
     });
 
-    // Smooth 3D tilt effect with requestAnimationFrame
+    // Smooth 3D tilt effect
     const card = document.getElementById("card");
     let mouseX = 0, mouseY = 0;
 
