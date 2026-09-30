@@ -2,111 +2,208 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"/>
   <title>Emre | Engineer</title>
+
   <link rel="icon" href="favicon.ico" type="image/x-icon">
+
   <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;700&display=swap" rel="stylesheet">
+
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
   <style>
-    html, body {
+    /* =========================
+       RESET & BACKGROUND
+    ========================= */
+
+    html {
       margin: 0;
       padding: 0;
-      height: 100%;
-      font-family: 'Figtree', sans-serif;
-      overflow: hidden;
+      width: 100%;
+      min-height: 100%;
+
+      background:
+        url('resumebackground.jpg')
+        center center / cover
+        no-repeat;
+
+      background-attachment: fixed;
     }
 
-    body::before {
-      content: "";
-      position: fixed;
-      top: 0;
-      left: 0;
+    body {
+      margin: 0;
+      padding: 0;
       width: 100%;
-      height: 100%;
-      background: url('resumebackground.jpg') no-repeat center center/cover;
-      z-index: -1;
+      min-height: 100vh;
+      min-height: 100dvh;
+
+      font-family: 'Figtree', sans-serif;
+
+      overflow: hidden;
+
+      background:
+        url('resumebackground.jpg')
+        center center / cover
+        no-repeat;
     }
+
+
+    /* =========================
+       PROFILE PICTURE
+    ========================= */
 
     .profile-pic {
-      position: absolute;
+      position: fixed;
+
       top: 40px;
       left: 50%;
+
       transform: translateX(-50%);
+
       width: 120px;
       height: 120px;
+
       border-radius: 50%;
       overflow: hidden;
+
       border: 3px solid white;
+
       z-index: 2;
     }
 
     .profile-pic img {
       width: 100%;
       height: 100%;
+
       object-fit: cover;
     }
 
+
+    /* =========================
+       MAIN WRAPPER
+    ========================= */
+
     .wrapper {
       display: flex;
+
       justify-content: center;
       align-items: center;
-      height: 100vh;
+
+      min-height: 100vh;
+      min-height: 100dvh;
+
+      width: 100%;
+
       padding: 20px;
+
       box-sizing: border-box;
+
       perspective: 800px;
+
       flex-direction: column;
+
       text-align: center;
     }
 
+
+    /* =========================
+       CARD
+    ========================= */
+
     .card {
       background: rgba(0, 0, 0, 0.8);
+
       color: white;
+
       padding: 40px;
+
       border-radius: 16px;
+
       max-width: 600px;
       width: 100%;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+
+      box-sizing: border-box;
+
+      box-shadow:
+        0 10px 30px rgba(0, 0, 0, 0.6);
+
       transition: transform 0.1s ease-out;
+
       will-change: transform;
     }
 
+
+    /* =========================
+       HEADINGS
+    ========================= */
+
     h1 {
       margin: 0;
+
       font-size: 2.2em;
     }
 
     .dynamic-wrapper {
       font-size: 1.8em;
+
       color: #00ffff;
+
       font-weight: bold;
+
       margin-top: 8px;
     }
 
+
+    /* =========================
+       TYPEWRITER CURSOR
+    ========================= */
+
     .cursor {
       display: inline-block;
+
       width: 2px;
       height: 1em;
+
       background-color: white;
+
       margin-left: 4px;
-      animation: blink 0.7s step-end infinite alternate;
+
+      animation:
+        blink 0.7s step-end infinite alternate;
     }
 
     @keyframes blink {
-      from { opacity: 1; }
-      to { opacity: 0; }
+      from {
+        opacity: 1;
+      }
+
+      to {
+        opacity: 0;
+      }
     }
+
+
+    /* =========================
+       SOCIAL ICONS
+    ========================= */
 
     .social-icons {
       margin-top: 25px;
+
       display: flex;
+
       justify-content: center;
+
       gap: 24px;
     }
 
     .social-icons a {
       color: white;
+
       font-size: 26px;
+
       text-decoration: none;
+
       transition: color 0.3s;
     }
 
@@ -114,111 +211,309 @@
       color: #00ffff;
     }
 
+
+    /* =========================
+       DOWNLOAD BUTTON
+    ========================= */
+
     .download-btn {
       margin-top: 30px;
+
       display: inline-block;
+
       padding: 12px 24px;
+
       background-color: #00ffff;
+
       color: black;
+
       border-radius: 8px;
+
       font-weight: bold;
+
       text-decoration: none;
-      transition: background-color 0.3s;
+
+      transition:
+        background-color 0.3s;
     }
 
     .download-btn:hover {
       background-color: #00cccc;
     }
 
+
+    /* =========================
+       MOBILE
+    ========================= */
+
     @media (max-width: 600px) {
+
+      .wrapper {
+        padding: 20px;
+      }
+
       .card {
         padding: 25px;
       }
+
       h1 {
         font-size: 1.7em;
       }
+
       .dynamic-wrapper {
         font-size: 1.3em;
       }
+
       .social-icons a {
         font-size: 22px;
       }
+
       .profile-pic {
         width: 100px;
         height: 100px;
+
         top: 20px;
       }
     }
+
+
+    /* =========================
+       iPHONE / SAFE AREA
+    ========================= */
+
+    @supports (padding: env(safe-area-inset-top)) {
+
+      .wrapper {
+        padding-top:
+          calc(20px + env(safe-area-inset-top));
+
+        padding-bottom:
+          calc(20px + env(safe-area-inset-bottom));
+      }
+
+      .profile-pic {
+        top:
+          calc(20px + env(safe-area-inset-top));
+      }
+    }
+
   </style>
 </head>
+
+
 <body>
+
+  <!-- PROFILE -->
   <div class="profile-pic">
-    <img src="IMG_2554.jpeg" alt="Profile Picture" />
+    <img
+      src="IMG_2554.jpeg"
+      alt="Profile Picture"
+    />
   </div>
 
+
+  <!-- MAIN CONTENT -->
   <div class="wrapper">
+
     <div class="card" id="card">
-      <h1>Hello there!</h1>
+
+      <h1>
+        Hello there!
+      </h1>
+
       <h2 class="dynamic-wrapper">
-        I'm <span id="typewriter"></span><span class="cursor"></span>
+        I'm
+        <span id="typewriter"></span>
+        <span class="cursor"></span>
       </h2>
 
-      <p>I am an Electrical and Electronics Engineer with a strong interest in software engineering and business analysis.</p>
-      <p>Passionate about leveraging technology for innovative solutions, I aim to contribute to impactful projects while continuously learning and growing. With analytical thinking, problem-solving skills, and a collaborative mindset, I am eager to add value to dynamic and challenging environments.</p>
-      
+
+      <p>
+        I am an Electrical and Electronics Engineer
+        with a strong interest in software engineering
+        and business analysis.
+      </p>
+
+
+      <p>
+        Passionate about leveraging technology for
+        innovative solutions, I aim to contribute to
+        impactful projects while continuously learning
+        and growing. With analytical thinking,
+        problem-solving skills, and a collaborative
+        mindset, I am eager to add value to dynamic
+        and challenging environments.
+      </p>
+
+
+      <!-- SOCIAL -->
       <div class="social-icons">
-        <a href="https://www.linkedin.com/in/emre-ozel-tr/" target="_blank"><i class="fab fa-linkedin-in"></i></a>
-        <a href="mailto:i.emreozell@gmail.com"><i class="fas fa-envelope"></i></a>
+
+        <a
+          href="https://www.linkedin.com/in/emre-ozel-tr/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <i class="fab fa-linkedin-in"></i>
+        </a>
+
+        <a
+          href="mailto:i.emreozell@gmail.com"
+        >
+          <i class="fas fa-envelope"></i>
+        </a>
+
       </div>
 
-      <a class="download-btn" href="https://drive.google.com/file/d/1QEA33pN_P7ZdoVcRkvLxvnBpB4vFeLz9/view?usp=drivesdk" target="_blank">Download CV</a>
+
+      <!-- CV -->
+      <a
+        class="download-btn"
+        href="https://drive.google.com/file/d/1QEA33pN_P7ZdoVcRkvLxvnBpB4vFeLz9/view?usp=drivesdk"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        Download CV
+      </a>
+
     </div>
+
   </div>
 
+
   <script>
-    // Typewriter effect
+
+    /* =========================
+       TYPEWRITER EFFECT
+    ========================= */
+
     document.addEventListener("DOMContentLoaded", () => {
-      const words = ["Emre", "a Thinker.", "an Engineer.", "Creative.", "a Dreamer."];
+
+      const words = [
+        "Emre",
+        "a Thinker.",
+        "an Engineer.",
+        "Creative.",
+        "a Dreamer."
+      ];
+
       let wordIndex = 0;
       let letterIndex = 0;
       let isDeleting = false;
-      const typewriter = document.getElementById("typewriter");
+
+      const typewriter =
+        document.getElementById("typewriter");
+
 
       function type() {
-        const word = words[wordIndex];
-        const visibleText = isDeleting ? word.substring(0, letterIndex--) : word.substring(0, letterIndex++);
-        typewriter.textContent = visibleText;
 
-        if (!isDeleting && letterIndex === word.length + 1) {
+        const word =
+          words[wordIndex];
+
+
+        const visibleText =
+          isDeleting
+            ? word.substring(0, letterIndex--)
+            : word.substring(0, letterIndex++);
+
+
+        typewriter.textContent =
+          visibleText;
+
+
+        if (
+          !isDeleting &&
+          letterIndex === word.length + 1
+        ) {
+
           isDeleting = true;
+
           setTimeout(type, 1000);
-        } else if (isDeleting && letterIndex === 0) {
-          isDeleting = false;
-          wordIndex = (wordIndex + 1) % words.length;
-          setTimeout(type, 200);
-        } else {
-          setTimeout(type, isDeleting ? 50 : 100);
+
         }
+
+        else if (
+          isDeleting &&
+          letterIndex === 0
+        ) {
+
+          isDeleting = false;
+
+          wordIndex =
+            (wordIndex + 1) % words.length;
+
+          setTimeout(type, 200);
+
+        }
+
+        else {
+
+          setTimeout(
+            type,
+            isDeleting ? 50 : 100
+          );
+
+        }
+
       }
 
+
       type();
+
     });
 
-    // Smooth 3D tilt effect
-    const card = document.getElementById("card");
-    let mouseX = 0, mouseY = 0;
 
-    document.addEventListener("mousemove", (e) => {
-      mouseX = (e.clientX / window.innerWidth - 0.5) * 10;
-      mouseY = (e.clientY / window.innerHeight - 0.5) * 10;
-    });
+    /* =========================
+       3D CARD TILT
+    ========================= */
+
+    const card =
+      document.getElementById("card");
+
+    let mouseX = 0;
+    let mouseY = 0;
+
+
+    document.addEventListener(
+      "mousemove",
+      (e) => {
+
+        mouseX =
+          (
+            e.clientX /
+            window.innerWidth -
+            0.5
+          ) * 10;
+
+
+        mouseY =
+          (
+            e.clientY /
+            window.innerHeight -
+            0.5
+          ) * 10;
+
+      }
+    );
+
 
     function animateTilt() {
-      card.style.transform = `rotateY(${mouseX}deg) rotateX(${-mouseY}deg)`;
-      requestAnimationFrame(animateTilt);
+
+      card.style.transform =
+        `rotateY(${mouseX}deg)
+         rotateX(${-mouseY}deg)`;
+
+
+      requestAnimationFrame(
+        animateTilt
+      );
+
     }
 
+
     animateTilt();
+
   </script>
+
 </body>
 </html>
